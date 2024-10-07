@@ -14,4 +14,4 @@ Other tools: Docker;
 2. Implement Search, Filter, and Review Systems - 22.10
 3. Implement admin panel, login and different access levels - 30.10
 4. Find glampings and manually add them - 04.11
-5. Testing - 12.11
+5. Testing - 10.11
