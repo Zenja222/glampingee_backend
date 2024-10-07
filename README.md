@@ -5,10 +5,10 @@
 **GOAL:** To make the platform that centralize glamping places across the Baltic States.
 
 **Tech Stack**
-Frontend: React
-Backend: Java, Spring
-Database: Firebase
-Other tools: Docker
+Frontend: React;
+Backend: Java, Spring;
+Database: Firebase;
+Other tools: Docker;
 
 1. Complete Backend and Frontend Integration (MVP) - 16.10
 2. Implement Search, Filter, and Review Systems - 22.10
