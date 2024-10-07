@@ -2,7 +2,7 @@
 
 **MEMBERS:** Jevgeni Pogodin, Oleg Spakov, Aleksandr Elistratov
 
-**GOAL:** To make the platform that centralize glamping places across the Baltic States.
+**GOAL:** To make the platform that centralizes glamping places across the Baltic States.
 
 **Tech Stack**
 Frontend: React;
