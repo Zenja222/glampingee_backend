@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "glamping-estonia",
+  "private_key_id": "ba00f415d06a5a24bf004afffb586acf278621d8",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQC5LR2LalFKa46E\nfN8OLbuqqJwEe5fUqe4rfnaRH+QRpPhe7jGAbNn0v2+grbif2T9TX55gki3Zvhax\n28a9jN0D4OkseGudAN8A4ObDkywPZaRn6bH/sYjtiUZlmAeSAVh0jTfKakAgSlP6\nqmdrBiDY01W/LHCOAwHb83mZy0AUa4K9EEznsU1ERk0cOaICZB7yCrAuLGVa2zCA\nt6lSy/g5iwndREMRd2LMvCEI7yeBictSwdcBt0r8Vq/JkUzN0VvgvoNk1nvgqft3\nz6lH3n0GIN8SnCcXvG+nLYFlBnA5Hq/IMWgPw0O+hM2mzpM7P1D9dnyD3wuRVgbn\n/voNinXBAgMBAAECggEAWFmOqZhhzayQlGTRtb2bNvr4aWkgkV48XPMbFfXNxp9b\nw0tJQfltakk2NMb9+gJYpOpPscq85pE72cM+yOxe/P0/szCHQ6MJQy2K3JAo6vW3\nYb7N5u2pI5AmDs3g+sf6kK1aC5DzJJTiCYxpCFalsF3woOROlWsY5Xz+rSKc4cBz\nhxG9V/Rsko1fl0uSO/gcuWdiMR4uIA0exougtPAR9P3NKywnnaafg5SdBf0GxbYA\nFzDHArdO4eZpFdzb0DlgujqN9GKqGUCMzmxPkV46b27O8IvhbDKnjjm1n14gJda3\nXtcdCsB6FKHJK5grHk0o887DMzXL6/LPD6oHdj5ruwKBgQDqxoDVeFTJ1gSIay3P\nGE16Nzx0jPiypnufRgSw25LfWc+4GPHq86qrXiTOSHemeiNO3M3ON/zcUtT0DSwz\n9AUunKA+6BjsGmwfdpGjzLev9gzDBZsZNgA7YzkO0cRm9rijKPIdCc7F0g7a05e3\nhWOGDOAE2EY8P8yt68PbkrbT6wKBgQDJ6rg4BAaOZtPXo63op7IsWYqU6iihkjGr\n6fl9EYMC+yLXLkwwb1NMuRr+Brddo1OXg33mdqJceg03zk8Rbrp/P01H34aTqwWw\n4iJcdskPSp1dOMMHUr7z9d8vz/z8T8oyauceTl7JfX4/cgzsAdVD93aVIL4pox2S\nY8Te+EVuAwKBgBhPSZPRC+aCVKHTh0DEYXFgOtBOsIm/F1ncpCuz8LdT02BapOIR\nLQDllKYPduQ0DWfjESRjQ7mEkixbGNKgV9EFwsoAumPoMH3phxcQ4YxEy/l9oRux\nLcD4ezX/nniS33d1i+xZ0aFGKOebtT/5fd6pgqC9zDf82zK/EN6xiGDVAoGASY4J\n4c4FnWZ0EX/84F4GmAVeaHUMrB8XnSq0ygzRDwrxXDXvZ02GqNJdtOA5eBEBaJZs\nDMJ2zv1fR08OmqkdozEqM96Hpc+NWSxnnAthnwJtZQJCea55BWIyFbbM0BU48Tjk\nTLP776aZkP85GdhpGkNRnW26GGzlXuidVSRYFoUCgYBXo+liweMH0H2mvWTm3eDk\ncpiMAr7gBndYMy6qsCdiO828/D0qCE/nGuZagivThEtVB/nYlmxfJSkgGPigiu2z\ngcqwtwaXBtSTm/FdN0DCfuhlt9vFZFGJo+/Np44wisAtqmuJxfco0D3grgY/ASuw\n4TIiiNMeaDXUe+rvQqrmkw==\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase@glamping-estonia.iam.gserviceaccount.com",
+  "client_id": "115168292129810757620",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase%40glamping-estonia.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
