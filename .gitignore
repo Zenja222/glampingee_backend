@@ -4,12 +4,12 @@ build/
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
 !**/src/test/**/build/
-
+glamping-estonia-ba00f415d06a.json
 ### STS ###
 .apt_generated
 .classpath
 .factorypath
-.project
+.projectzzzzzz
 .settings
 .springBeans
 .sts4-cache

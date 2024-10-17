@@ -1,4 +1,4 @@
-package com.mainor.project21.glampingestonia;
+package com.mainor.project21.glampingestonia.security;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Bean;
@@ -21,3 +21,4 @@ public class SecurityConfig {
         return http.build();
     }
 }
+
