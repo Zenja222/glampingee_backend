@@ -4,6 +4,7 @@ import com.mainor.project21.glampingestonia.dto.GlampingDTO;
 import com.mainor.project21.glampingestonia.service.GlampingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,5 +22,10 @@ public class GlampingController {
     @GetMapping
     public List<GlampingDTO> getAll() throws ExecutionException, InterruptedException, IOException {
         return glampingService.getAll();
+    }
+
+    @GetMapping("/{id}")
+    public GlampingDTO findById(@PathVariable String id) throws IOException, ExecutionException, InterruptedException {
+        return glampingService.getById(id);
     }
 }

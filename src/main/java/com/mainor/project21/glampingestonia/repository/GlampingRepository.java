@@ -20,20 +20,36 @@ public class GlampingRepository {
     private static final String COLLECTION_NAME = "glampings";
 
     public List<Glamping> findAll() throws ExecutionException, InterruptedException, IOException {
-        Firestore dbFirestore = FirebaseDb.getFirestoreDb(); // Use your custom FirebaseDb class
+        Firestore dbFirestore = FirebaseDb.getFirestoreDb();
         ApiFuture<QuerySnapshot> future = dbFirestore.collection(COLLECTION_NAME).get();
         List<QueryDocumentSnapshot> documents = future.get().getDocuments();
         List<Glamping> glampings = new ArrayList<>();
 
-        if (documents != null) {
-            for (DocumentSnapshot document : documents) {
-                Glamping glamping = document.toObject(Glamping.class);
-                if (glamping != null) {
-                    glamping.setId(document.getId());
-                    glampings.add(glamping);
-                }
+        for (DocumentSnapshot document : documents) {
+            Glamping glamping = document.toObject(Glamping.class);
+            if (glamping != null) {
+                glamping.setId(document.getId());
+                glampings.add(glamping);
             }
         }
         return glampings;
     }
+
+    public Glamping findById(String id) throws ExecutionException, InterruptedException, IOException {
+        Firestore dbFirestore = FirebaseDb.getFirestoreDb();
+        ApiFuture<DocumentSnapshot> future = dbFirestore.collection(COLLECTION_NAME).document(id).get();
+        DocumentSnapshot document = future.get();
+
+        if (document.exists()) {
+            Glamping glamping = document.toObject(Glamping.class);
+            if (glamping != null) {
+                glamping.setId(document.getId());
+            }
+            return glamping;
+        } else {
+            return null;
+        }
+    }
+
+
 }
