@@ -5,13 +5,14 @@ import com.mainor.project21.glampingestonia.model.Glamping;
 
 public class GlampingMapper {
 
-    public static GlampingDTO toDto(Glamping glamping){
-        GlampingDTO glampingDTO = new GlampingDTO();
-        glampingDTO.setId(glamping.getId());
-        glampingDTO.setName(glamping.getName());
-        glampingDTO.setDescription(glamping.getDescription());
-        glampingDTO.setPicture(glamping.getPicture());
-        glampingDTO.setLocation(glamping.getLocation());
-        return glampingDTO;
+    public static GlampingDTO toDto(Glamping glamping) {
+        return new GlampingDTO(
+                glamping.getId(),
+                glamping.getName(),
+                glamping.getDescription(),
+                glamping.getPicture(),
+                glamping.getLocation(),
+                glamping.getPrice()
+        );
     }
 }
