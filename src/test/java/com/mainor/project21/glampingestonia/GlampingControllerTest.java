@@ -14,7 +14,6 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
-import java.util.List;
 
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -38,11 +37,22 @@ class GlampingControllerTest {
 
     @Test
     void getAll_ReturnsGlampingList() throws Exception {
-        List<GlampingDTO> mockGlampingList = Arrays.asList(
-                new GlampingDTO("1", "Glamping 1", "Description 1", "pic1.jpg", "Location 1", new BigDecimal("100.00")),
-                new GlampingDTO("2", "Glamping 2", "Description 2", "pic2.jpg", "Location 2", new BigDecimal("200.00"))
-        );
-        when(glampingService.getAll()).thenReturn(mockGlampingList);
+        GlampingDTO mockGlamping1 = new GlampingDTO();
+        mockGlamping1.setId("1");
+        mockGlamping1.setName("Glamping 1");
+        mockGlamping1.setDescription("Description 1");
+        mockGlamping1.setPicture("pic1.jpg");
+        mockGlamping1.setLocation("Location 1");
+        mockGlamping1.setPrice(new BigDecimal("100.00"));
+
+        GlampingDTO mockGlamping2 = new GlampingDTO();
+        mockGlamping2.setId("2");
+        mockGlamping2.setName("Glamping 2");
+        mockGlamping2.setDescription("Description 2");
+        mockGlamping2.setPicture("pic2.jpg");
+        mockGlamping2.setLocation("Location 2");
+        mockGlamping2.setPrice(new BigDecimal("200.00"));
+        when(glampingService.getAll()).thenReturn(Arrays.asList(mockGlamping1, mockGlamping2));
 
         mockMvc.perform(get("/glamping")
                         .contentType(MediaType.APPLICATION_JSON))
@@ -63,8 +73,14 @@ class GlampingControllerTest {
     @Test
     void findById_ReturnsGlampingById() throws Exception {
         String id = "1";
-        GlampingDTO mockGlamping = new GlampingDTO(id, "Glamping 1", "Description 1", "pic1.jpg", "Location 1", new BigDecimal("100.00"));
-        when(glampingService.getById(id)).thenReturn(mockGlamping);
+        GlampingDTO mockGlamping1 = new GlampingDTO();
+        mockGlamping1.setId("1");
+        mockGlamping1.setName("Glamping 1");
+        mockGlamping1.setDescription("Description 1");
+        mockGlamping1.setPicture("pic1.jpg");
+        mockGlamping1.setLocation("Location 1");
+        mockGlamping1.setPrice(new BigDecimal("100.00"));
+        when(glampingService.getById(id)).thenReturn(mockGlamping1);
 
         mockMvc.perform(get("/glamping/{id}", id)
                         .contentType(MediaType.APPLICATION_JSON))

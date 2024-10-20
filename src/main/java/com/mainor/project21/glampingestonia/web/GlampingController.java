@@ -3,10 +3,7 @@ package com.mainor.project21.glampingestonia.web;
 import com.mainor.project21.glampingestonia.dto.GlampingDTO;
 import com.mainor.project21.glampingestonia.service.GlampingService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.List;
@@ -27,5 +24,12 @@ public class GlampingController {
     @GetMapping("/{id}")
     public GlampingDTO findById(@PathVariable String id) throws IOException, ExecutionException, InterruptedException {
         return glampingService.getById(id);
+    }
+
+    @GetMapping("/filter")
+    public List<GlampingDTO> filterGlampings(
+            @RequestParam(defaultValue = "price") String sortField,
+            @RequestParam(defaultValue = "asc") String sortDirection) throws IOException, ExecutionException, InterruptedException {
+                return glampingService.filterByField(sortField,sortDirection);
     }
 }

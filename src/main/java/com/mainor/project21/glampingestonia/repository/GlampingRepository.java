@@ -1,10 +1,7 @@
 package com.mainor.project21.glampingestonia.repository;
 
 import com.google.api.core.ApiFuture;
-import com.google.cloud.firestore.Firestore;
-import com.google.cloud.firestore.QueryDocumentSnapshot;
-import com.google.cloud.firestore.QuerySnapshot;
-import com.google.cloud.firestore.DocumentSnapshot;
+import com.google.cloud.firestore.*;
 import com.mainor.project21.glampingestonia.model.Glamping;
 import org.springframework.stereotype.Repository;
 
@@ -50,5 +47,28 @@ public class GlampingRepository {
         }
     }
 
+    public List<Glamping> filterByField(String sortField, String sortDirection) throws ExecutionException, InterruptedException, IOException {
+        Firestore dbFirestore = FirebaseDb.getFirestoreDb();
+        Query query = dbFirestore.collection(COLLECTION_NAME);
 
+        if ("asc".equalsIgnoreCase(sortDirection)) {
+            query = query.orderBy(sortField);
+        } else if ("desc".equalsIgnoreCase(sortDirection)) {
+            query = query.orderBy(sortField, Query.Direction.DESCENDING);
+        }
+
+        ApiFuture<QuerySnapshot> future = query.get();
+        List<QueryDocumentSnapshot> documents = future.get().getDocuments();
+        List<Glamping> glampings = new ArrayList<>();
+
+
+        for (DocumentSnapshot document : documents) {
+            Glamping glamping = document.toObject(Glamping.class);
+            if (glamping != null) {
+                glamping.setId(document.getId());
+                glampings.add(glamping);
+            }
+        }
+        return glampings;
+    }
 }

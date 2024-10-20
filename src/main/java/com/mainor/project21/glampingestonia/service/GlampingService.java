@@ -38,4 +38,9 @@ public class GlampingService {
     private Glamping requireGlamping(String id) throws IOException, ExecutionException, InterruptedException {
         return glampingRepository.findById(id);
     }
+
+    public List<GlampingDTO> filterByField(String sortField, String sortDirection) throws IOException, ExecutionException, InterruptedException {
+        List<Glamping> glampings = glampingRepository.filterByField(sortField,sortDirection);
+        return glampings.stream().map(GlampingMapper::toDto).toList();
+    }
 }
