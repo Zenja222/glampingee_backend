@@ -13,6 +13,8 @@ public class GlampingMapper {
         glampingDTO.setPicture(glamping.getPicture());
         glampingDTO.setLocation(glamping.getLocation());
         glampingDTO.setPrice(glamping.getPrice());
+        glampingDTO.setCounty(glamping.getCounty());
+        glampingDTO.setLinkToBook(glamping.getLinkToBook());
         return glampingDTO;
     }
 }

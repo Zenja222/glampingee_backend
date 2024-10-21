@@ -32,52 +32,79 @@ class GlampingServiceTest {
         MockitoAnnotations.openMocks(this);
     }
 
+    private Glamping createMockGlamping(String id, String name, String description, String location,
+                                        List<String> picture, String county, BigDecimal price, String linkToBook) {
+        Glamping glamping = new Glamping();
+        glamping.setId(id);
+        glamping.setName(name);
+        glamping.setPicture(picture);
+        glamping.setCounty(county);
+        glamping.setLinkToBook(linkToBook);
+        glamping.setDescription(description);
+        glamping.setLocation(location);
+        glamping.setPrice(price);
+        return glamping;
+    }
+
     @Test
     void getAll_ReturnsListOfGlampingDTOs() throws ExecutionException, InterruptedException, IOException {
-        Glamping mockGlamping1 = new Glamping();
-        mockGlamping1.setId("1");
-        mockGlamping1.setName("Glamping 1");
-        mockGlamping1.setDescription("Description 1");
-        mockGlamping1.setPicture("pic1.jpg");
-        mockGlamping1.setLocation("Location 1");
-        mockGlamping1.setPrice(new BigDecimal("100.00"));
+        List<String> pictures = Arrays.asList("pic1.jpg", "pic2.jpg");
 
-        Glamping mockGlamping2 = new Glamping();
-        mockGlamping2.setId("2");
-        mockGlamping2.setName("Glamping 2");
-        mockGlamping2.setDescription("Description 2");
-        mockGlamping2.setPicture("pic2.jpg");
-        mockGlamping2.setLocation("Location 2");
-        mockGlamping2.setPrice(new BigDecimal("200.00"));
+        Glamping mockGlamping1 = createMockGlamping("1", "Glamping 1", "Description 1", "Location 1",
+                pictures, "County 1", new BigDecimal("100.00"), "Link to book 1");
+        Glamping mockGlamping2 = createMockGlamping("2", "Glamping 2", "Description 2", "Location 2",
+                pictures, "County 2", new BigDecimal("200.00"), "Link to book 2");
 
         when(glampingRepository.findAll()).thenReturn(Arrays.asList(mockGlamping1, mockGlamping2));
 
         List<GlampingDTO> result = glampingService.getAll();
 
         assertEquals(2, result.size());
-        assertEquals("Glamping 1", result.get(0).getName());
-        assertEquals("100.00", result.get(0).getPrice().toString());
+        assertEquals("Glamping 1", result.getFirst().getName());
+        assertEquals("100.00", result.getFirst().getPrice().toString());
         verify(glampingRepository, times(1)).findAll();
     }
 
     @Test
     void getById_ReturnsGlampingDTOById() throws ExecutionException, InterruptedException, IOException {
-        String id = "1";
-        Glamping mockGlamping = new Glamping();
-        mockGlamping.setId(id);
-        mockGlamping.setName("Glamping 1");
-        mockGlamping.setDescription("Description 1");
-        mockGlamping.setPicture("pic1.jpg");
-        mockGlamping.setLocation("Location 1");
-        mockGlamping.setPrice(new BigDecimal("100.00"));
+        List<String> pictures = Arrays.asList("pic1.jpg", "pic2.jpg");
+        Glamping mockGlamping = createMockGlamping("1", "Glamping 1", "Description 1", "Location 1",
+                pictures, "County 1", new BigDecimal("100.00"), "Link to book 1");
 
-        when(glampingRepository.findById(id)).thenReturn(mockGlamping);
+        when(glampingRepository.findById(mockGlamping.getId())).thenReturn(mockGlamping);
 
-        GlampingDTO result = glampingService.getById(id);
+        GlampingDTO result = glampingService.getById(mockGlamping.getId());
 
         assertNotNull(result);
         assertEquals("Glamping 1", result.getName());
         assertEquals("100.00", result.getPrice().toString());
-        verify(glampingRepository, times(1)).findById(id);
+        verify(glampingRepository, times(1)).findById(mockGlamping.getId());
     }
+
+    @Test
+    void getById_ReturnsSortedGlampingDTOsByPrice() throws ExecutionException, InterruptedException, IOException {
+        List<String> pictures1 = Arrays.asList("pic1.jpg", "pic2.jpg");
+        Glamping mockGlamping1 = createMockGlamping("1", "Glamping 1", "Description 1", "Location 1",
+                pictures1, "County 1", new BigDecimal("200.00"), "Link to book 1");
+
+        List<String> pictures2 = Arrays.asList("pic3.jpg", "pic4.jpg");
+        Glamping mockGlamping2 = createMockGlamping("2", "Glamping 2", "Description 2", "Location 2",
+                pictures2, "County 2", new BigDecimal("100.00"), "Link to book 2");
+
+        List<Glamping> mockGlampings = Arrays.asList(mockGlamping2, mockGlamping1);
+
+        when(glampingRepository.filterByField("price", "asc")).thenReturn(mockGlampings);
+
+        List<GlampingDTO> result = glampingService.filterByField("price", "asc");
+
+        assertNotNull(result);
+        assertEquals(2, result.size());
+        assertEquals("Glamping 2", result.get(0).getName());
+        assertEquals("100.00", result.get(0).getPrice().toString());
+        assertEquals("Glamping 1", result.get(1).getName());
+        assertEquals("200.00", result.get(1).getPrice().toString());
+
+        verify(glampingRepository, times(1)).filterByField("price", "asc");
+    }
+
 }
