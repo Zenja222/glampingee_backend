@@ -1,5 +1,6 @@
 package com.mainor.project21.glampingestonia.web;
 
+import com.mainor.project21.glampingestonia.dto.CreateGlampingRequest;
 import com.mainor.project21.glampingestonia.dto.GlampingDTO;
 import com.mainor.project21.glampingestonia.service.GlampingService;
 import lombok.RequiredArgsConstructor;
@@ -30,6 +31,21 @@ public class GlampingController {
     public List<GlampingDTO> filterGlampings(
             @RequestParam(defaultValue = "price") String sortField,
             @RequestParam(defaultValue = "asc") String sortDirection) throws IOException, ExecutionException, InterruptedException {
-                return glampingService.filterByField(sortField,sortDirection);
+        return glampingService.filterByField(sortField, sortDirection);
+    }
+
+    @PostMapping
+    public GlampingDTO create(@RequestBody CreateGlampingRequest request) throws IOException, ExecutionException, InterruptedException {
+        return glampingService.create(request);
+    }
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable String id) throws IOException, ExecutionException, InterruptedException {
+        glampingService.delete(id);
+    }
+
+    @PutMapping("/{id}")
+    public GlampingDTO update(@PathVariable String id, @RequestBody GlampingDTO request) throws IOException, ExecutionException, InterruptedException {
+        return glampingService.update(id, request);
     }
 }

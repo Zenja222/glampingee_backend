@@ -13,7 +13,6 @@ public class GlampingDTO {
     private String county;
     private String linkToBook;
     private List<String> picture;
-    private String location;
     private BigDecimal price;
 
 }

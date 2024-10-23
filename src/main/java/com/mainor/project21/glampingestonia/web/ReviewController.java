@@ -14,6 +14,7 @@ public class ReviewController {
 
     private final ReviewService reviewService;
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/{glampingId}")
     public void addReview(@PathVariable String glampingId, @RequestParam int rating) throws ExecutionException, InterruptedException, IOException {
         reviewService.addReview(glampingId, rating);

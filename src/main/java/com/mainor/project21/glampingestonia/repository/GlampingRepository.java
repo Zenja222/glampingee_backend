@@ -71,4 +71,27 @@ public class GlampingRepository {
         }
         return glampings;
     }
+
+    public Glamping save(Glamping glamping) throws ExecutionException, InterruptedException, IOException {
+        Firestore dbFirestore = FirebaseDb.getFirestoreDb();
+        DocumentReference documentReference;
+
+        if (glamping.getId() == null || glamping.getId().isEmpty()) {
+            documentReference = dbFirestore.collection(COLLECTION_NAME).document();
+            glamping.setId(documentReference.getId());
+        } else {
+            documentReference = dbFirestore.collection(COLLECTION_NAME).document(glamping.getId());
+        }
+        ApiFuture<WriteResult> future = documentReference.set(glamping);
+        future.get();
+        return glamping;
+    }
+
+    public void delete(String id) throws IOException, ExecutionException, InterruptedException {
+        Firestore dbFirestore = FirebaseDb.getFirestoreDb();
+        DocumentReference documentReference = dbFirestore.collection(COLLECTION_NAME).document(id);
+        ApiFuture<WriteResult> future = documentReference.delete();
+        future.get();
+    }
+
 }
