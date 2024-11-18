@@ -54,4 +54,11 @@ public class GlampingService {
         Glamping glamping = GlampingMapper.updateEntity(glampingDTO, requireGlamping(id));
         return GlampingMapper.toDto(glampingRepository.save(glamping));
     }
+
+    public List<GlampingDTO> searchByName(String keyword, String language) throws IOException, ExecutionException, InterruptedException {
+        List<Glamping> glampings = glampingRepository.searchByName(keyword, language);
+        return glampings.stream()
+                .map(GlampingMapper::toDto)
+                .toList();
+    }
 }

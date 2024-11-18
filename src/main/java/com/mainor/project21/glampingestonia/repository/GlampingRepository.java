@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
 @Repository
@@ -71,6 +72,40 @@ public class GlampingRepository {
         }
         return glampings;
     }
+
+    public List<Glamping> searchByName(String keyword, String language) throws IOException, ExecutionException, InterruptedException {
+        Firestore dbFirestore = FirebaseDb.getFirestoreDb();
+        ApiFuture<QuerySnapshot> future = dbFirestore.collection(COLLECTION_NAME).get();
+        List<QueryDocumentSnapshot> documents = future.get().getDocuments();
+        List<Glamping> matchedGlampings = new ArrayList<>();
+
+        String lowerCaseKeyword = keyword.toLowerCase();
+
+        for (DocumentSnapshot document : documents) {
+            Object nameObject = document.get("name");
+
+            if (nameObject instanceof Map) {
+                @SuppressWarnings("unchecked")
+                Map<String, String> nameMap = (Map<String, String>) nameObject;
+
+                String nameInLanguage = nameMap.get(language);
+
+                if (nameInLanguage != null && nameInLanguage.toLowerCase().contains(lowerCaseKeyword)) {
+                    Glamping glamping = document.toObject(Glamping.class);
+                    if (glamping != null) {
+                        glamping.setId(document.getId());
+                        matchedGlampings.add(glamping);
+                    }
+                }
+            } else {
+                System.out.println("Invalid or missing 'name' field for document ID: " + document.getId());
+            }
+        }
+
+        return matchedGlampings;
+    }
+
+
 
     public Glamping save(Glamping glamping) throws ExecutionException, InterruptedException, IOException {
         Firestore dbFirestore = FirebaseDb.getFirestoreDb();

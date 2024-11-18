@@ -48,4 +48,13 @@ public class GlampingController {
     public GlampingDTO update(@PathVariable String id, @RequestBody GlampingDTO request) throws IOException, ExecutionException, InterruptedException {
         return glampingService.update(id, request);
     }
+
+    @GetMapping("/search")
+    public List<GlampingDTO> searchGlampings(
+            @RequestParam String keyword,
+            @RequestParam(defaultValue = "en") String language
+    ) throws IOException, ExecutionException, InterruptedException {
+        return glampingService.searchByName(keyword, language);
+    }
+
 }
