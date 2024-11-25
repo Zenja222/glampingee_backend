@@ -9,8 +9,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -41,8 +43,11 @@ public class GlampingService {
     }
 
     public List<GlampingDTO> filterByField(String sortField, String sortDirection) throws IOException, ExecutionException, InterruptedException {
-        List<Glamping> glampings = glampingRepository.filterByField(sortField,sortDirection);
-        return glampings.stream().map(GlampingMapper::toDto).toList();
+        List<Glamping> glampings = glampingRepository.filterByField(sortField, sortDirection);
+
+        return glampings.stream()
+                .map(GlampingMapper::toDto)
+                .collect(Collectors.toList());
     }
 
     public void delete(String id) throws IOException, ExecutionException, InterruptedException {
@@ -53,6 +58,14 @@ public class GlampingService {
     public GlampingDTO update(String id, GlampingDTO glampingDTO) throws IOException, ExecutionException, InterruptedException {
         Glamping glamping = GlampingMapper.updateEntity(glampingDTO, requireGlamping(id));
         return GlampingMapper.toDto(glampingRepository.save(glamping));
+    }
+
+    public List<GlampingDTO> filterByPriceRange(BigDecimal minPrice, BigDecimal maxPrice) throws IOException, ExecutionException, InterruptedException {
+        List<Glamping> glampings = glampingRepository.filterByPriceRange(minPrice, maxPrice);
+
+        return glampings.stream()
+                .map(GlampingMapper::toDto)
+                .collect(Collectors.toList());
     }
 
     public List<GlampingDTO> searchByName(String keyword, String language) throws IOException, ExecutionException, InterruptedException {

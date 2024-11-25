@@ -6,6 +6,7 @@ import com.mainor.project21.glampingestonia.model.Glamping;
 import org.springframework.stereotype.Repository;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -103,6 +104,31 @@ public class GlampingRepository {
         }
 
         return matchedGlampings;
+    }
+
+    public List<Glamping> filterByPriceRange(BigDecimal minPrice, BigDecimal maxPrice) throws ExecutionException, InterruptedException, IOException {
+        Firestore dbFirestore = FirebaseDb.getFirestoreDb();
+        Query query = dbFirestore.collection(COLLECTION_NAME);
+
+        if (minPrice != null) {
+            query = query.whereGreaterThanOrEqualTo("price", minPrice.doubleValue());
+        }
+        if (maxPrice != null) {
+            query = query.whereLessThanOrEqualTo("price", maxPrice.doubleValue());
+        }
+
+        ApiFuture<QuerySnapshot> future = query.get();
+        List<QueryDocumentSnapshot> documents = future.get().getDocuments();
+        List<Glamping> glampings = new ArrayList<>();
+
+        for (DocumentSnapshot document : documents) {
+            Glamping glamping = document.toObject(Glamping.class);
+            if (glamping != null) {
+                glamping.setId(document.getId());
+                glampings.add(glamping);
+            }
+        }
+        return glampings;
     }
 
 

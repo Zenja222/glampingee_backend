@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
@@ -57,4 +58,11 @@ public class GlampingController {
         return glampingService.searchByName(keyword, language);
     }
 
+    @GetMapping("/filterByPrice")
+    public List<GlampingDTO> filterByPriceRange(
+            @RequestParam BigDecimal minPrice,
+            @RequestParam BigDecimal maxPrice
+    ) throws IOException, ExecutionException, InterruptedException {
+        return glampingService.filterByPriceRange(minPrice, maxPrice);
+    }
 }
